@@ -7,16 +7,19 @@
     <link rel="stylesheet" href="./Assets/css/style.css">
     <title>Weather API</title>
 </head>
+
 <nav id="title">
     <h1>Weather Dashboard</h1>
-
+<body>
 <main id="main">
     <div id="searchbox">
         <h2>Search for a City:</h2>
-        <input id="searchtext"></input>
-        <button id="search">Search</button>
+        <form id="weatherform">
+            <input id="searchtext"></input>
+            <button type="submit" id="search">Search</button>
         <div id="break"></div>
         <div id="cityoutput"></div>
+        </form>
     </div>
 
     <div id="outputbox">
@@ -49,7 +52,12 @@
         
     </div>
 </main>
-<body>
+<script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/Main/Assets/js/script.js"></script>
     
 </body>
 </html>
