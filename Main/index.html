@@ -20,12 +20,13 @@
 <main id="main">
     <div id="searchbox">
         <h2>Search for a City:</h2>
-        <form id="weatherform">
+        <form id="weatherForm">
+            <label for="cityName" class="form-label"></label>
             <input type="text"
             class="form-control"
-            id="searchtext"
-            aria-describedby="movieHelp"
-            required></input>
+            id="cityName"
+            aria-describedby="cityHelp"
+            required />
             <button type="submit" id="search">Search</button>
         <div id="break"></div>
         <div id="cityoutput"></div>
