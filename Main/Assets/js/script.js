@@ -6,7 +6,6 @@ var cityNameEl = $("#cityName");
 // Weather API key
 var API_KEY = "4b542e0983727542e6d0ae70fafd5319";
 
-
 function getCityByName(name) {
     // https://api.openweathermap.org/data/2.5/weather?q=london&appid=4b542e0983727542e6d0ae70fafd5319
     return fetch(
@@ -16,33 +15,14 @@ function getCityByName(name) {
     });
 }
 
-// No city found handler
-function handleNoCityFound(name) {
-    var div = $(
-      '<div class="alert alert-danger alert-dismissible fade show" role="alert"></div>'
-    );
-    var strong = $(
-      "<strong>We didn't find any citys with this name" + name + "</strong>"
-    );
-    var button = $(
-      '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'
-    );
-    
-    div.append(strong);
-    div.append(button);
-
-    cityOutputEl.append(div);
-}
-
 // Rendering of city name on submit
 function renderCityName(city) {
-    var name = city.Name;
+    var name = city.name;
 
     cityOutputEl.empty();
 
     var cityNameBox = $(
-        '<div class="citynamebox" style="width: 100%; height: 35px; background-color: light-gray; color: black;">' + 
-        "<h3 class=city-name><span>" + name + "</span></h3>" + "</div>"
+        "<button class=city-name><span>" + name + "</span></button>"
     );
 
     cityOutputEl.append(cityNameBox);
@@ -50,22 +30,49 @@ function renderCityName(city) {
     // Need to then store in local storage
 }
 
+// // Gets from local storage store
+// function getStoredCityEntries() {
+//     var storedEntry = JSON.parse(localStorage.getItem('cityData'));
+//     if (storedEntry) {
+//         return storedEntry;
+//     } else {
+//         return [];
+//     }
+// }
+
+// // Stores in local storage
+// function saveCityToList(city) {
+//     var store = getStoredCityEntries();
+//     var inList = false;
+//     store.forEach(element => {
+//         if (element === city) {
+//             inList = true;
+//         }
+//     });
+//     if (!inList) {
+//         store.push(city);
+//     }
+//     localStorage.setItem('cityData', JSON.stringify(store));
+// }
+
+
 weatherFormEl.on("submit", function (event) {
     event.preventDefault();
 
     var cityName = cityNameEl.val();
 
     getCityByName(cityName).then(function (data) {
-        if (data.Error) {
+        if (data.cod == 404) {
             // No city found
-            handleNoCityFound(cityName);
+            alert("No city found for this name!");
         }   else {
             // A city was found
             renderCityName(data);
         }
     });
 });
-    
+
+
 
 
 // Output to cards
