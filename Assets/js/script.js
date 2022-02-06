@@ -1,87 +1,77 @@
-// City weather search and output section variables
-var weatherFormEl = $("#weatherForm");
-var searchBtn = $("search");
-var cityOutputEl = $("#cityoutput");
-var cityNameEl = $("#cityName");
-// Weather API key
 var API_KEY = "4b542e0983727542e6d0ae70fafd5319";
+var citySelectorEl = document.querySelector("#city-selector");
+var cityNameEl = document.querySelector("#city-name");
+var searchBtn = document.querySelector('#search');
+var weatherOutputEl = document.querySelector("#weather-output");
+var dayCards = document.querySelector("#day-cards");
+var prevSearchBtn = document.querySelector("#previous-search");
+var clearyBtn = document.querySelector("#cleary");
+var cardReveal = document.querySelector(".card");
+var hideContent = document.querySelector("#hidden");
 
-function getCityByName(name) {
-    // https://api.openweathermap.org/data/2.5/weather?q=london&appid=4b542e0983727542e6d0ae70fafd5319
-    return fetch(
-        "https://api.openweathermap.org/data/2.5/weather?q=" + name + "&appid=" + API_KEY
-    ).then(function (res) {
-        return res.json();
-    });
-}
+searchBtn.addEventListener("click", getCityWeather);
 
-// Rendering of city name on submit
-function renderCityName(city) {
-    var name = city.name;
-
-    cityOutputEl.empty();
-
-    var cityNameBox = $(
-        "<button class=city-name><span>" + name + "</span></button>"
-    );
-
-    cityOutputEl.append(cityNameBox);
-    
-    // Need to then store in local storage
-}
-
-// // Gets from local storage store
-// function getStoredCityEntries() {
-//     var storedEntry = JSON.parse(localStorage.getItem('cityData'));
-//     if (storedEntry) {
-//         return storedEntry;
-//     } else {
-//         return [];
-//     }
-// }
-
-// // Stores in local storage
-// function saveCityToList(city) {
-//     var store = getStoredCityEntries();
-//     var inList = false;
-//     store.forEach(element => {
-//         if (element === city) {
-//             inList = true;
-//         }
-//     });
-//     if (!inList) {
-//         store.push(city);
-//     }
-//     localStorage.setItem('cityData', JSON.stringify(store));
-// }
-
-
-weatherFormEl.on("submit", function (event) {
+function getCityWeather (event) {
     event.preventDefault();
+    dayCards.setAttribute("border", "2px");
+    var city = citySelectorEl.value;
+    if (city) {
+        getCityWeather(city);
+        citySelectorEl.textContent = " ";
+        cityNameEl.textContent = " ";
+        weatherOutputEl.textContent = " ";
+        dayCards.textContent = " ";
+    } else {
+        alert ("You must enter a city");
+    }
+}
 
-    var cityName = cityNameEl.val();
+var getCityWeather = function (city) {
+    var apiUrl = 'https://api.openweathermap.org/geo/1.0/direct?q='+city+',*&limit=3&appid='+API_KEY;
+    fetch(apiUrl)
+    .then(function (res) {
+      if (res.ok) {
+        res.json().then(function (data) {
+          displayWeather(data);
+      });
+    }
+  })
+};
+//   cities.push(data);
+//   saveSearch();
+//   prevSearch(data);
+// };
 
-    getCityByName(cityName).then(function (data) {
-        if (data.cod == 404) {
-            // No city found
-            alert("No city found for this name!");
-        }   else {
-            // A city was found
-            renderCityName(data);
-        }
-    });
-});
-
-
-
-
-// Output to cards
-// var dayCardsEl = 
+var displayWeather = function (cities) {
+if (cities.length === 0) {
+    weatherOutputEl.textContent = 'No weather stored!';
+    return;
+}
  
-// var London = 
-// var Brighton =
-// var Birmingham = 
-// var Manchester = 
-// var Plymouth = 
+for (var i = 0; i < cities.length; i++) {
+  var city = cities[i].name + '  ' + cities[i].country;
+  var cityButton = document.createElement('button');
+  cityButton.classList = 'btn btn-success mt-3';
+  cityButton.setAttribute('data', city);
+  cityButton.setAttribute('id', 'click');
+  prevSearchBtn.appendChild(cityButton);
+  cityButton.textContent = city;
+}
+}
 
-
+  // make an api call on the saved 
+  var prevSearchHandler = function (event) {
+        var city = event.target.getAttribute("data")
+        cityNameEl.value = " ";
+        weatherOutputEl.textContent = " ";
+        dayCards.textContent = " ";
+        var apiUrl = 'https://api.openweathermap.org/geo/1.0/direct?q='+city+',*&limit=3&appid='+API_KEY;
+        fetch(apiUrl)
+        .then(function (res) {
+        if (res.ok) {
+          res.json().then(function (data) {
+            displayWeather(data, city);
+          });
+      }
+    })
+  };

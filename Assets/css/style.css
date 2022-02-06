@@ -21,8 +21,37 @@ h1 {
     font-size: 45px;
 }
 
-#searchbox {
+#hidden {
+    display: none;
+}
+
+.text-left {
+    margin-top: 50px;
+}
+
+#search {
+    margin-top: 20px;
+}
+
+/* .cityButton {
+    background-color: blue;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* #searchbox {
     order: 1;
+    border-radius: 1em;
     margin-top: 20px;
     padding-left: 20px;
     width: 20%;
@@ -36,14 +65,16 @@ h1 {
 }
 
 #cityName {
+    border-radius: 1em;
     margin-left: 18px;
     width: 80%;
     height: 50px;
     font-size: 25px;
 }
 
-#search {
+#submit {
     margin-top: 20px;
+    border-radius: 1em;
     width: 80%;
     margin-left: 18px;
     height: 35px;
@@ -75,7 +106,8 @@ h1 {
 
 
 .city-name {
-    width: 100%; 
+    width: 100%;
+    border-radius: 1em; 
     height: 35px; 
     background-color: grey; 
     color: white;
@@ -121,4 +153,4 @@ h1 {
     width: 18.5%;
     border: 2px solid black;
     margin-bottom: 30px;
-}
+} */
