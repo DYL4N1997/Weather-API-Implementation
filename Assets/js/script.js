@@ -1,33 +1,35 @@
 var API_KEY = "4b542e0983727542e6d0ae70fafd5319";
 var citySelectorEl = document.querySelector("#city-selector");
 var cityNameEl = document.querySelector("#city-name");
-var searchBtn = document.querySelector('#search');
+var searchBtn = document.querySelector('#submit');
 var weatherOutputEl = document.querySelector("#weather-output");
 var dayCards = document.querySelector("#day-cards");
 var prevSearchBtn = document.querySelector("#previous-search");
 var clearyBtn = document.querySelector("#cleary");
 var cardReveal = document.querySelector(".card");
 var hideContent = document.querySelector("#hidden");
+var locBtn = new Object();
 
-searchBtn.addEventListener("click", getCityWeather);
+searchBtn.addEventListener("click", getCoords);
 
-function getCityWeather (event) {
+
+function getCoords (event) {
     event.preventDefault();
-    dayCards.setAttribute("border", "2px");
-    var city = citySelectorEl.value;
+    var city = citySelectorEl.value.trim();
     if (city) {
-        getCityWeather(city);
+        getCoords(city);
         citySelectorEl.textContent = " ";
         cityNameEl.textContent = " ";
         weatherOutputEl.textContent = " ";
+        prevSearchBtn.textContent = " ";
         dayCards.textContent = " ";
     } else {
         alert ("You must enter a city");
     }
 }
 
-var getCityWeather = function (city) {
-    var apiUrl = 'https://api.openweathermap.org/geo/1.0/direct?q='+city+',*&limit=3&appid='+API_KEY;
+var getCoords = function (city) {
+    var apiUrl = 'https://api.openweathermap.org/geo/1.0/direct?q='+city+',*,&limit=1&appid='+API_KEY;
     fetch(apiUrl)
     .then(function (res) {
       if (res.ok) {
@@ -37,41 +39,33 @@ var getCityWeather = function (city) {
     }
   })
 };
-//   cities.push(data);
-//   saveSearch();
-//   prevSearch(data);
-// };
 
-var displayWeather = function (cities) {
-if (cities.length === 0) {
-    weatherOutputEl.textContent = 'No weather stored!';
+console.log("Cities Searched");
+
+var displayWeather = function (possibleCities) {
+  if (possibleCities.length===0) {
+    var cityGroup=document.querySelector("#weather-output")
+    cityGroup.textContent = "Please choose a valid city";
     return;
-}
- 
-for (var i = 0; i < cities.length; i++) {
-  var city = cities[i].name + '  ' + cities[i].country;
-  var cityButton = document.createElement('button');
-  cityButton.classList = 'btn btn-success mt-3';
-  cityButton.setAttribute('data', city);
-  cityButton.setAttribute('id', 'click');
-  prevSearchBtn.appendChild(cityButton);
-  cityButton.textContent = city;
-}
+  }
+  for (var i = 0; i < possibleCities.length; i++) {
+    var city = possibleCities[i].name + '  ' + possibleCities[i].country;
+    var citi = document.createElement('ul');
+    citi.classList = 'btn btn-success w-100'
+    citi.textContent = city;
+    citi.name = 'choice';
+    citi.id = 'choice' +i;
+    citi.value=i;
+    prevSearchBtn.appendChild(citi);
+  }
+
+console.log ("Generated city buttons");
+
 }
 
-  // make an api call on the saved 
-  var prevSearchHandler = function (event) {
-        var city = event.target.getAttribute("data")
-        cityNameEl.value = " ";
-        weatherOutputEl.textContent = " ";
-        dayCards.textContent = " ";
-        var apiUrl = 'https://api.openweathermap.org/geo/1.0/direct?q='+city+',*&limit=3&appid='+API_KEY;
-        fetch(apiUrl)
-        .then(function (res) {
-        if (res.ok) {
-          res.json().then(function (data) {
-            displayWeather(data, city);
-          });
-      }
-    })
-  };
+
+
+
+
+
+
