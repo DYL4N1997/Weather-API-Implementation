@@ -32,26 +32,33 @@
               </form>
          <!-- clear local storage -->
          <button type="cleary" id="btncleary" class="btn btn-danger mt-3 w-100">Clear All</button>
-        
         <!-- buttons to previous searches -->
         <div id="previous-search" class="card">
         </div>
-      <!-- todays weather -->
-      <div id="hidden" class="col-12 col-sm-12 col-md-12 col-lg-9 text-center">
-        <div class="card mb-3 mt-3 text-white bg-info">
-          <div class="card-body">
+
+      <!-- Current forecast -->
+      <div class="col-12 col-sm-12 col-md-12 col-lg-9 text-center">
+        <!-- todays weather -->
+        <div class ="row">
+        <div class="current-weather-container mb-3 mt-3 text-white bg-info">
+          <div id="current-weather" class="text-white">
 
             <h2 id="city-name" class="card-title"></h2>
-            <div id="weather-output"></div>
+            <ul id="weather-output"></ul>
           </div>
+        </div>
         </div>
     
         <!-- 5 day forecast -->
-        <div class="day-cards" id="day-cards">
+        <div class="row">
+          <div class = "">
+            <div id="futureForecastH">
+              <div id="futureForecast" class="d-flex justify-content-between flex-wrap">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 </main>
 <script src="Assets/js/script.js"></script>
 <script
