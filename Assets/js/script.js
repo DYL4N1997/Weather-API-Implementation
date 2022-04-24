@@ -3,11 +3,45 @@ const cityFormEl = document.querySelector("#weather-form");
 const citySelectorEl = document.querySelector("#city-selector");
 const searchBtn = document.querySelector('#submit');
 const prevSearch = [];
-const currentWheatherEl = document.querySelector("#current-weather");
+const cityTitleEl = document.querySelector("#city-name");
+const currentWeatherEl = document.querySelector("#current-weather");
 const futureForecastEl = document.querySelector("#futureForecast");
 
+const searchLocation = (event) => {
+  event.preventDefault();
+  resetDisplay();
 
+  const cityName = citySelectorEl.value.trim();
+  if (cityName) {
+    getCurrentWeather(cityName);
+    getFutureWeather(cityName);
+    savePrevSearches(cityName);
+  } else {
+    alert("You must enter a valid city");
+  }
+};
 
+const getCurrentWeather = (cityName) => {
+    let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" +
+    cityName +
+    "&units=metric" +
+    "&appid=" +
+    API_KEY;
+  // fetching api data
+  fetch(apiUrl)
+    .then(function (res) {
+      if (res.ok) {
+        return res.json().then(function (data) {
+          displayCurrentWeather(data, cityName);
+        });
+      } else {
+        alert("Error: You must enter a valid city");
+      }
+    })
+    .catch(function (err) {
+      alert("Error: ");
+    });
+};
 
 
 
