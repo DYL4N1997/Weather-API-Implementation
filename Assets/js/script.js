@@ -32,7 +32,7 @@ const getCurrentWeather = (cityName) => {
     .then(function (res) {
       if (res.ok) {
         return res.json().then(function (data) {
-          displayCurrentWeather(data, cityName);
+          showCurrentWeather(data, cityName);
         });
       } else {
         alert("Error: You must enter a valid city");
@@ -43,7 +43,32 @@ const getCurrentWeather = (cityName) => {
     });
 };
 
+const showCurrentWeather = (weatherData, citySearch) => {
+    let currentDate = moment().format(", MMMM Do YYYY");
+    cityTitleEl.textContent = citySearch + currentDate;
 
+    // Syntax to map weather variables to objects
+    let temp = weatherData.main.temp;
+    let wind = weatherData.wind.speed;
+    let humidity = weatherData.main.humidity;
+
+    // create
+    let tempEl = document.createElement("li");
+    let windEl = document.createElement("li");
+    let humidityEl = document.createElement("li");
+
+    // ammend
+    tempEl.textContent = "Temp: " + temp + " °C";
+    windEl.textContent = "Wind: " + wind + " MPH";
+    humidityEl.textContent = "Humidity: " + humidity + " %";
+
+    // append
+    weatherDataList.appendChild(tempEl);
+    weatherDataList.appendChild(windEl);
+    weatherDataList.appendChild(humidityEl);
+
+    currentUVIndex(weatherData.coord);
+};
 
 
 
