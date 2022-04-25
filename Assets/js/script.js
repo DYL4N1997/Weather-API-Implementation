@@ -9,7 +9,7 @@ const futureForecastEl = document.querySelector("#futureForecast");
 
 const searchLocation = (event) => {
   event.preventDefault();
-  resetDisplay();
+//   resetDisplay();
 
   const cityName = citySelectorEl.value.trim();
   if (cityName) {
@@ -67,13 +67,45 @@ const showCurrentWeather = (weatherData, citySearch) => {
     weatherDataList.appendChild(windEl);
     weatherDataList.appendChild(humidityEl);
 
-    currentUVIndex(weatherData.coord);
+    latestUVIndex(weatherData.coord);
 };
 
+// Get UV Index
+    latestUVIndex = (coord) => {
+    let apiUrl =
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    coord.lat +
+    "&lon=" +
+    coord.lon +
+    "&appid=" +
+    apiKey;
+
+    fetch(apiUrl).then(function (res) {
+        return res.json().then(function (data) {
+          displayUVIndex(data);
+        });
+      });
+    }
+
+displayUVIndex = (weatherData) => {
+    let uv = weatherData.daily[0].uvi;
+
+    // Create
+    let uvIndexEl = document.createElement("li");
+    let uvIndexBtn = document.createElement("button");
+
+    // ammend
+    uvIndexEl.textContent = "UV Index: ";
+    uvIndexBtn.textContent = uv + " %";
+
+    // append
+
+    weatherDataList.appendChild(uvIndexEl);
+    uvIndexBtn.appendChild(uvIndexBtn);
+}
 
 
-
-
+cityFormEl.addEventListener("submit", searchLocation);
 
 
 
