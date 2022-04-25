@@ -4,6 +4,7 @@ const citySelectorEl = document.querySelector("#city-selector");
 const searchBtn = document.querySelector('#submit');
 const prevSearch = [];
 const cityTitleEl = document.querySelector("#city-name");
+const weatherDataUl = document.querySelector("#weather-output");
 const currentWeatherEl = document.querySelector("#current-weather");
 const futureForecastEl = document.querySelector("#futureForecast");
 
@@ -63,9 +64,9 @@ const showCurrentWeather = (weatherData, citySearch) => {
     humidityEl.textContent = "Humidity: " + humidity + " %";
 
     // append
-    weatherDataList.appendChild(tempEl);
-    weatherDataList.appendChild(windEl);
-    weatherDataList.appendChild(humidityEl);
+    weatherDataUl.appendChild(tempEl);
+    weatherDataUl.appendChild(windEl);
+    weatherDataUl.appendChild(humidityEl);
 
     latestUVIndex(weatherData.coord);
 };
@@ -98,9 +99,11 @@ displayUVIndex = (weatherData) => {
     uvIndexEl.textContent = "UV Index: ";
     uvIndexBtn.textContent = uv + " %";
 
+    uvIndexBtn.classList.add("medium-risk");
+
     // append
 
-    weatherDataList.appendChild(uvIndexEl);
+    weatherDataUl.appendChild(uvIndexEl);
     uvIndexBtn.appendChild(uvIndexBtn);
 }
 
@@ -123,7 +126,7 @@ displayFutureWeather = (futureWeatherData) => {
     let forecastHeader = $(
         `<h3 class="text-primary text-center text-uppercase mb-4" >5-Day Forecast<h3/>`
     );
-    $("#futureForecastHeader").append(forecastHeader);
+    $("#futureForecastH").append(forecastHeader);
 
     for (let i = 1; i < futureWeatherData.length; i += 8) {
         let unixFormat = moment.unix(futureWeatherData[i].dt).format("MMMM Do YYYY");
@@ -151,13 +154,6 @@ displayFutureWeather = (futureWeatherData) => {
 }
 
 cityFormEl.addEventListener("submit", searchLocation);
-
-
-
-
-
-
-
 
 
 

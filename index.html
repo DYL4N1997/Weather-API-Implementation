@@ -16,11 +16,12 @@
 <body>
     <nav id="title">
         <h1>Weather Dashboard</h1>
-<main id="main">
    
+  <!-- Search for a city -->
     <div class="container-fluid h-80">
-        <div class="row-align-items-top">
-        <div id="no-border" class="col-12 col-sm-12 col-md-12 col-lg-3">
+      <div class="row">
+        <div class="col-sm-12 col-lg-3 d-flex flex-column">
+        <div class="current-weather-card my-4">
             <h2 class="text-left">
                 Search for a city:
               </h2>
@@ -33,18 +34,23 @@
          <!-- clear local storage -->
          <button type="cleary" id="btncleary" class="btn btn-danger mt-3 w-100">Clear All</button>
         <!-- buttons to previous searches -->
-        <div id="previous-search" class="card">
+        <div id="current-weather-card">
+          <h3 class="text-center card-header med-text">Previous Searches:</h3>
+            <div id="prevSearch" class="card-body">
+            </div>
+          </div>
         </div>
+      </div>
 
       <!-- Current forecast -->
-      <div class="col-12 col-sm-12 col-md-12 col-lg-9 text-center">
+      <div class="col-sm-12 col-lg-9">
         <!-- todays weather -->
         <div class ="row">
-        <div class="current-weather-container mb-3 mt-3 text-white bg-info">
-          <div id="current-weather" class="text-white">
+        <div class="current-weather-card my-4 p-4">
+          <div id="current-weather" class="text-black">
 
-            <h2><span id="city-name"></span> class="card-title"></h2>
-            <ul id="weather-output"></ul>
+            <h2><span id="city-name"></span></h2>
+            <ul id="weather-output" class="text-black"></ul>
           </div>
         </div>
         </div>
@@ -59,7 +65,6 @@
           </div>
         </div>
       </div>
-</main>
 <script src="Assets/js/script.js"></script>
 <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"

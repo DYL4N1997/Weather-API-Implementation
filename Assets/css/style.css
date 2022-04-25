@@ -3,10 +3,10 @@
     margin: 0;
 }
 
-#main {
+/* #main {
     display: flex;
     flex-flow: row wrap;
-}
+} */
 
 #title {
     background-color: darkblue;
@@ -33,124 +33,10 @@ h1 {
     margin-top: 20px;
 }
 
-/* .cityButton {
-    background-color: blue;
-} */
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* #searchbox {
-    order: 1;
-    border-radius: 1em;
-    margin-top: 20px;
-    padding-left: 20px;
-    width: 20%;
-    height: 800px;
-}
-
-#searchbox h2 {
-    font-size: 30px;
-    margin-bottom: 20px;
-    margin-left: 45px;
-}
-
-#cityName {
-    border-radius: 1em;
-    margin-left: 18px;
-    width: 80%;
-    height: 50px;
-    font-size: 25px;
-}
-
-#submit {
-    margin-top: 20px;
-    border-radius: 1em;
-    width: 80%;
-    margin-left: 18px;
-    height: 35px;
-    background-color: skyblue;
-}
-
-#break {
-    margin-top: 20px;
-    border: 2px solid black;
-    width: 80%;
-    margin-left: 18px;
-}
-
-#cityoutput {
-    margin-top: 20px;
-    margin-left: 18px;
-    width: 80%;
-    height: 500px;
-    font-size: 25px;
-    padding-bottom: 10px;
-}
-
-#outputbox {
-    order: 2;
-    margin-top: 20px;
-    width: 78%;
-    height: 703px;
+.current-weather-card {
+    padding: 1 rem;
+    color: black;
+    border: 0.1px solid;
 }
 
 
-.city-name {
-    width: 100%;
-    border-radius: 1em; 
-    height: 35px; 
-    background-color: grey; 
-    color: white;
-}
-
-
-#OB1 {
-    border: 2px solid black;
-    height: 280px;
-}
-
-#OB1 h2 {
-    font-size: 30px;
-    margin-left: 20px;
-    margin-top: 5px;
-}
-
-#OB1 p {
-    font-size: 30px;
-    margin-left: 20px;
-    margin-top: 20px;
-}
-
-#OB2 {
-    display: flex;
-    flex-flow: row wrap;
-    height: 400px;
-    margin-top: 20px;
-}
-
-#OB2 h2 {
-    order: 1;
-    height: 30px;
-    width: 100%;
-    font-size: 30px;
-    margin-bottom: 20px;
-}
-
-.daycards {
-    order: 2;
-    margin-right: 22px;
-    height: 280px;
-    width: 18.5%;
-    border: 2px solid black;
-    margin-bottom: 30px;
-} */
