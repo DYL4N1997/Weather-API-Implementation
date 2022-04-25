@@ -78,7 +78,7 @@ const showCurrentWeather = (weatherData, citySearch) => {
     "&lon=" +
     coord.lon +
     "&appid=" +
-    apiKey;
+    API_KEY;
 
     fetch(apiUrl).then(function (res) {
         return res.json().then(function (data) {
@@ -103,6 +103,41 @@ displayUVIndex = (weatherData) => {
     weatherDataList.appendChild(uvIndexEl);
     uvIndexBtn.appendChild(uvIndexBtn);
 }
+
+getFutureWeather = (cityName) => {
+    let apiUrl = 
+    "https://api.openweathermap.org/data/2.5/forecast?q=" +
+    cityName +
+    "&units=metric" +
+    "&appid=" +
+    API_KEY;
+
+    fetch(apiUrl).then(function (res) {
+        return res.json().then(function(data) {
+            displayFutureWeather(data.list);
+        });
+    });
+}
+
+displayFutureWeather = (futureWeatherData) => {
+    let forecastHeader = $(
+        `<h3 class="text-primary text-center text-uppercase mb-4" >5-Day Forecast<h3/>`
+    );
+    $("#futureForecastHeader").append(forecastHeader);
+
+    for (let i = 1; i < futureWeatherData.length; i += 8) {
+        let unixFormat = moment.unix(futureWeatherData[i].dt).format("MMMM Do YYYY");
+        let futureCityData = {
+            date: unixFormat,
+            icon: futureWeatherData[i].weather[0].icon,
+            maxTemp: futureWeatherData[i].main.temp_max,
+            minTemp: futureWeatherData[i].main.temp_min,
+            wind: futureWeatherData[i].wind.speed,
+            humidity: futureWeatherData[i].main.humidity,
+        };
+
+        
+    }
 
 
 cityFormEl.addEventListener("submit", searchLocation);
