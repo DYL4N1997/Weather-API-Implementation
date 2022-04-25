@@ -1,18 +1,19 @@
-const API_KEY = "4b542e0983727542e6d0ae70fafd5319";
-const cityFormEl = document.querySelector("#weather-form");
-const citySelectorEl = document.querySelector("#city-selector");
-const searchBtn = document.querySelector('#submit');
-const prevSearch = [];
-const cityTitleEl = document.querySelector("#city-name");
-const weatherDataUl = document.querySelector("#weather-output");
-const currentWeatherEl = document.querySelector("#current-weather");
-const futureForecastEl = document.querySelector("#futureForecast");
+let cityFormEl = document.querySelector("#weather-form");
+let citySelectorEl = document.querySelector("#city-selector");
+let searchBtn = document.querySelector('#submit');
+let prevSearch = [];
+let cityTitleEl = document.querySelector("#city-name");
+let weatherDataUl = document.querySelector("#weather-output");
+let currentWeatherEl = document.querySelector("#current-weather");
+let futureForecastEl = document.querySelector("#futureForecast");
 
-const searchLocation = (event) => {
+const API_KEY = "4b542e0983727542e6d0ae70fafd5319";
+
+let searchLocation = (event) => {
   event.preventDefault();
   documentReset();
 
-  const cityName = citySelectorEl.value.trim();
+  let cityName = citySelectorEl.value.trim();
   if (cityName) {
     getCurrentWeather(cityName);
     getFutureWeather(cityName);
@@ -23,25 +24,49 @@ const searchLocation = (event) => {
 };
 
 // Get rid of previous data
-function documentReset() {
+documentReset = () => {
     futureForecastEl.innerHTML = " ";
     $("#futureForecastH").text(" ");
     cityTitleEl.textContent = " ";
     weatherDataUl.innerHTML = " ";
 }
 
+let buttonSubmit = (event) => {
+    documentReset();
+    let cityButton = event.target.getAttribute("data-city");
 
-function savePrevSearches(cityName) {
+    if (cityButton) {
+        getCurrentWeather(cityButton);
+        getFutureWeather(cityButton);
+    }
+};
+
+$(document).on("click", ".city-button", buttonSubmit);
+
+// Delete history button event listener
+$("#btncleary").on("click", () => {
+    localStorage.clear();
+    removePreviousSearches();
+    documentReset();
+    location.reload();
+});
+
+// Function to remove previous searches
+removePreviousSearches = () => {
+    $(".city-button").remove();
+}
+
+savePrevSearches = (cityName) => {
     if (!prevSearch.includes(cityName)) {
       prevSearch.push(cityName);
-      var cityInput = $(`
-      <button data-city="${cityName}" class="btn btn-success w-100 list-city">${cityName}</button>`);
+      let cityInput = $(`
+      <button data-city="${cityName}" class="btn btn-success w-100 my-1 city-button">${cityName}</button>`);
       $("#prevSearch").append(cityInput);
       localStorage.setItem("city", JSON.stringify(prevSearch));
     }
   }
 
-const getCurrentWeather = (cityName) => {
+let getCurrentWeather = (cityName) => {
     let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
     "&units=metric" +
@@ -63,7 +88,7 @@ const getCurrentWeather = (cityName) => {
     });
 };
 
-const showCurrentWeather = (weatherData, citySearch) => {
+let showCurrentWeather = (weatherData, citySearch) => {
     let currentDate = moment().format(", MMMM Do YYYY");
     cityTitleEl.textContent = citySearch + currentDate;
 
@@ -112,7 +137,7 @@ displayUVIndex = (weatherData) => {
 
     // Create
     let uvIndexEl = document.createElement("li");
-    let uvIndexBtn = document.createElement("span");
+    let uvIndexBtn = document.createElement("button");
 
     // ammend
     uvIndexEl.textContent = "UV Index: ";
@@ -122,7 +147,7 @@ displayUVIndex = (weatherData) => {
     // append
 
     weatherDataUl.appendChild(uvIndexEl);
-    uvIndexBtn.appendChild(uvIndexBtn);
+    weatherDataUl.appendChild(uvIndexBtn);
 }
 
 getFutureWeather = (cityName) => {
@@ -173,6 +198,23 @@ displayFutureWeather = (futureWeatherData) => {
 
 cityFormEl.addEventListener("submit", searchLocation);
 
+getLocalStorage();
 
+// Create button elements from local storage data
+function getLocalStorage() {
+    if (localStorage.getItem("city")) {
+      prevSearch = JSON.parse(localStorage.getItem("city"));
+  
+      for (var i = 0; i < prevSearch.length; i++) {
+        var cityName = prevSearch[i];
+        var cityInput = $(`
+      <button data-city="${cityName}" class="btn btn-success w-100 my-1 city-button">${cityName}</button>`);
+        $("#prevSearch").append(cityInput);
+      }
+      // Display the last searched city on screen
+      getCurrentWeather(prevSearch[prevSearch.length - 1]);
+      getFutureWeather(prevSearch[prevSearch.length - 1]);
+    }
+}
 
 

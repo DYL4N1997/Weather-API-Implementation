@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="./Assets/js/script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -22,8 +23,8 @@
       <div class="row">
         <div class="col-sm-12 col-lg-3 d-flex flex-column">
         <div class="current-weather-card my-4">
-            <h2 class="text-left">
-                Search for a city:
+            <h2 class="text-center">
+                Search For A City:
               </h2>
               <form id="weather-form">
                 <div class="form-box">
@@ -31,11 +32,11 @@
                 </div>
                 <button type="submit" id="submit" class="btn btn-success w-100">Search</button>
               </form>
-         <!-- clear local storage -->
-         <button type="cleary" id="btncleary" class="btn btn-danger mt-3 w-100">Clear All</button>
         <!-- buttons to previous searches -->
         <div id="current-weather-card">
           <h3 class="text-center card-header med-text">Previous Searches:</h3>
+          <!-- clear local storage -->
+         <button type="submit" id="btncleary" class="btn btn-danger mt-3 w-100">Clear All</button>
             <div id="prevSearch" class="card-body">
             </div>
           </div>
@@ -58,23 +59,25 @@
         <!-- 5 day forecast -->
         <div class="row">
           <div class = "">
-            <div id="futureForecastH">
+            <div id="futureForecastH"></div>
               <div id="futureForecast" class="d-flex justify-content-between flex-wrap">
               </div>
             </div>
           </div>
         </div>
       </div>
-<script src="Assets/js/script.js"></script>
 <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
       crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     ></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-    crossorigin="anonymous"></script>
+   
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+  integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
 </body>
 </html>
