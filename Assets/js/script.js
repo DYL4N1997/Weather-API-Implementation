@@ -31,6 +31,16 @@ function documentReset() {
 }
 
 
+function savePrevSearches(cityName) {
+    if (!prevSearch.includes(cityName)) {
+      prevSearch.push(cityName);
+      var cityInput = $(`
+      <button data-city="${cityName}" class="btn btn-success w-100 list-city">${cityName}</button>`);
+      $("#prevSearch").append(cityInput);
+      localStorage.setItem("city", JSON.stringify(prevSearch));
+    }
+  }
+
 const getCurrentWeather = (cityName) => {
     let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" +
     cityName +
@@ -102,13 +112,12 @@ displayUVIndex = (weatherData) => {
 
     // Create
     let uvIndexEl = document.createElement("li");
-    let uvIndexBtn = document.createElement("button");
+    let uvIndexBtn = document.createElement("span");
 
     // ammend
     uvIndexEl.textContent = "UV Index: ";
     uvIndexBtn.textContent = uv + " %";
 
-    uvIndexBtn.classList.add("medium-risk");
 
     // append
 
