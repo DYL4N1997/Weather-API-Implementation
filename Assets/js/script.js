@@ -10,7 +10,7 @@ const futureForecastEl = document.querySelector("#futureForecast");
 
 const searchLocation = (event) => {
   event.preventDefault();
-//   resetDisplay();
+  documentReset();
 
   const cityName = citySelectorEl.value.trim();
   if (cityName) {
@@ -21,6 +21,15 @@ const searchLocation = (event) => {
     alert("You must enter a valid city");
   }
 };
+
+// Get rid of previous data
+function documentReset() {
+    futureForecastEl.innerHTML = " ";
+    $("#futureForecastH").text(" ");
+    cityTitleEl.textContent = " ";
+    weatherDataUl.innerHTML = " ";
+}
+
 
 const getCurrentWeather = (cityName) => {
     let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" +
