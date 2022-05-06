@@ -9,8 +9,8 @@ let futureForecastEl = document.querySelector("#futureForecast");
 
 const API_KEY = "4b542e0983727542e6d0ae70fafd5319";
 
-let searchLocation = (event) => {
-  event.preventDefault();
+let searchLocation = (e) => {
+  e.preventDefault();
   documentReset();
 
   let cityName = citySelectorEl.value.trim();
@@ -125,8 +125,8 @@ let showCurrentWeather = (weatherData, citySearch) => {
     "&appid=" +
     API_KEY;
 
-    fetch(apiUrl).then(function (res) {
-        return res.json().then(function (data) {
+    fetch(apiUrl).then((res) => {
+        return res.json().then( (data) => {
           displayUVIndex(data);
         });
       });
@@ -158,8 +158,8 @@ getFutureWeather = (cityName) => {
     "&appid=" +
     API_KEY;
 
-    fetch(apiUrl).then(function (res) {
-        return res.json().then(function(data) {
+    fetch(apiUrl).then( (res) => {
+        return res.json().then( (data) =>{
             displayFutureWeather(data.list);
         });
     });

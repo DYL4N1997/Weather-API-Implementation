@@ -16,7 +16,7 @@
 
 h1 {
     color: white;
-    margin-left: 40%;
+    margin-left: 35%;
     padding-top: 10px;
     font-size: 45px;
 }
@@ -33,9 +33,20 @@ h1 {
     margin-top: 20px;
 }
 
-.current-weather-card {
+.live-weather-card {
     padding: 1 rem;
     color: black;
+    border-radius: 8px;
+    border: 1px solid lightblue;
+    background-color: lightblue;
+}
+
+.future-card-property {
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 0.25rem 0.5rem;
+    border: 1px solid lightblue;
+    background-color: lightblue;
 }
 
 
