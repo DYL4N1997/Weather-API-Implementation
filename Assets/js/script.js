@@ -31,9 +31,9 @@ documentReset = () => {
     weatherDataUl.innerHTML = " ";
 }
 
-let buttonSubmit = (event) => {
+let buttonSubmit = (e) => {
     documentReset();
-    let cityButton = event.target.getAttribute("data-city");
+    let cityButton = e.target.getAttribute("data-city");
 
     if (cityButton) {
         getCurrentWeather(cityButton);
@@ -74,16 +74,16 @@ let getCurrentWeather = (cityName) => {
     API_KEY;
   // fetching api data
   fetch(apiUrl)
-    .then(function (res) {
+    .then((res) => {
       if (res.ok) {
-        return res.json().then(function (data) {
+        return res.json().then((data) => {
           showCurrentWeather(data, cityName);
         });
       } else {
         alert("Error: You must enter a valid city");
       }
     })
-    .catch(function (err) {
+    .catch((err) => {
       alert("Error: ");
     });
 };
@@ -117,14 +117,7 @@ let showCurrentWeather = (weatherData, citySearch) => {
 
 // Get UV Index
     latestUVIndex = (coord) => {
-    let apiUrl =
-    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-    coord.lat +
-    "&lon=" +
-    coord.lon +
-    "&appid=" +
-    API_KEY;
-
+    let apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + coord.lat + "&lon=" + coord.lon + "&appid=" + API_KEY;
     fetch(apiUrl).then((res) => {
         return res.json().then( (data) => {
           displayUVIndex(data);
@@ -143,23 +136,15 @@ displayUVIndex = (weatherData) => {
     uvIndexEl.textContent = "UV Index: ";
     uvIndexBtn.textContent = uv + " %";
 
-
     // append
-
     weatherDataUl.appendChild(uvIndexEl);
     weatherDataUl.appendChild(uvIndexBtn);
 }
 
 getFutureWeather = (cityName) => {
-    let apiUrl = 
-    "https://api.openweathermap.org/data/2.5/forecast?q=" +
-    cityName +
-    "&units=metric" +
-    "&appid=" +
-    API_KEY;
-
+    let apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=metric" + "&appid=" + API_KEY;
     fetch(apiUrl).then( (res) => {
-        return res.json().then( (data) =>{
+        return res.json().then( (data) => {
             displayFutureWeather(data.list);
         });
     });
@@ -211,7 +196,7 @@ function getLocalStorage() {
       <button data-city="${cityName}" class="btn btn-success w-100 my-1 city-button">${cityName}</button>`);
         $("#prevSearch").append(cityInput);
       }
-      // Display the last searched city on screen
+      // Display/persist the last searched city on screen
       getCurrentWeather(prevSearch[prevSearch.length - 1]);
       getFutureWeather(prevSearch[prevSearch.length - 1]);
     }
