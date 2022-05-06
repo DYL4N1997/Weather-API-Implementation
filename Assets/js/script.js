@@ -67,11 +67,7 @@ savePrevSearches = (cityName) => {
   }
 
 let getCurrentWeather = (cityName) => {
-    let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" +
-    cityName +
-    "&units=metric" +
-    "&appid=" +
-    API_KEY;
+    let apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=metric" + "&appid=" + API_KEY;
   // fetching api data
   fetch(apiUrl)
     .then((res) => {
