@@ -7,7 +7,7 @@ Application that gives the current weather forecast for elected locations, using
 
 # Application Image
 
-
+![screencapture-dyl4n1997-github-io-Weather-API-Implementation-2022-05-07-00_14_36](https://user-images.githubusercontent.com/82978161/167226941-ce0678c7-3efa-4425-bf07-544858439106.png)
 
 # Technologies Used
 
